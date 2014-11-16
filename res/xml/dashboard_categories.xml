@@ -93,7 +93,6 @@
                 android:title="@string/simpleaosp_settings_title"
                 android:fragment="com.android.settings.simpleaosp.AdditionalSettings"
                 android:icon="@drawable/ic_settings_optipop" />
-	</dashboard-tile>
 
         <!-- Home -->
         <dashboard-tile
