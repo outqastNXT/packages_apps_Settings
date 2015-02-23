@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (C) 2012-2014 SlimRoms Project
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <!-- Arrays for root access capability -->
+    <string-array name="root_access_entries">
+        <item>@string/root_access_none</item>
+        <item>@string/root_access_apps</item>
+        <item>@string/root_access_adb</item>
+        <item>@string/root_access_all</item>
+    </string-array>
+
+    <string-array name="root_access_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <!-- App ops, extension of AOSP app_ops_summaries and app_ops_labels -->
+    <string-array name="app_ops_summaries_cm" translatable="false">
+        <item>@string/app_ops_summaries_coarse_location</item>
+        <item>@string/app_ops_summaries_fine_location</item>
+        <item>@string/app_ops_summaries_gps</item>
+        <item>@string/app_ops_summaries_vibrate</item>
+        <item>@string/app_ops_summaries_read_contacts</item>
+        <item>@string/app_ops_summaries_modify_contacts</item>
+        <item>@string/app_ops_summaries_read_call_log</item>
+        <item>@string/app_ops_summaries_modify_call_log</item>
+        <item>@string/app_ops_summaries_read_calendar</item>
+        <item>@string/app_ops_summaries_modify_calendar</item>
+        <item>@string/app_ops_summaries_wifi_scan</item>
+        <item>@string/app_ops_summaries_notification</item>
+        <item>@string/app_ops_summaries_cell_scan</item>
+        <item>@string/app_ops_summaries_call_phone</item>
+        <item>@string/app_ops_summaries_read_sms</item>
+        <item>@string/app_ops_summaries_write_sms</item>
+        <item>@string/app_ops_summaries_receive_sms</item>
+        <item>@string/app_ops_summaries_receive_emergency_sms</item>
+        <item>@string/app_ops_summaries_receive_mms</item>
+        <item>@string/app_ops_summaries_receive_wap_push</item>
+        <item>@string/app_ops_summaries_send_sms</item>
+        <item>@string/app_ops_summaries_read_icc_sms</item>
+        <item>@string/app_ops_summaries_write_icc_sms</item>
+        <item>@string/app_ops_summaries_modify_settings</item>
+        <item>@string/app_ops_summaries_draw_on_top</item>
+        <item>@string/app_ops_summaries_access_notifications</item>
+        <item>@string/app_ops_summaries_camera</item>
+        <item>@string/app_ops_summaries_record_audio</item>
+        <item>@string/app_ops_summaries_play_audio</item>
+        <item>@string/app_ops_summaries_read_clipboard</item>
+        <item>@string/app_ops_summaries_modify_clipboard</item>
+        <item>@string/app_ops_summaries_media_buttons</item>
+        <item>@string/app_ops_summaries_audio_focus</item>
+        <item>@string/app_ops_summaries_master_volume</item>
+        <item>@string/app_ops_summaries_voice_volume</item>
+        <item>@string/app_ops_summaries_ring_volume</item>
+        <item>@string/app_ops_summaries_media_volume</item>
+        <item>@string/app_ops_summaries_alarm_volume</item>
+        <item>@string/app_ops_summaries_notification_volume</item>
+        <item>@string/app_ops_summaries_bluetooth_volume</item>
+        <item>@string/app_ops_summaries_keep_awake</item>
+        <item>@string/app_ops_summaries_monitor_location</item>
+        <item>@string/app_ops_summaries_monitor_high_power_location</item>
+        <item>@string/app_ops_summaries_get_usage_stats</item>
+        <item>@string/app_ops_summaries_mute_unmute_microphone</item>
+        <item>@string/app_ops_summaries_toast_window</item>
+        <item>@string/app_ops_summaries_project_media</item>
+        <item>@string/app_ops_summaries_activate_vpn</item>
+        <item>@string/app_ops_summaries_wifi_change</item>
+        <item>@string/app_ops_summaries_bluetooth_change</item>
+        <item>@string/app_ops_summaries_send_mms</item>
+        <item>@string/app_ops_summaries_read_mms</item>
+        <item>@string/app_ops_summaries_write_mms</item>
+        <item>@string/app_ops_summaries_auto_start</item>
+        <item>@string/app_ops_summaries_nfc_change</item>
+        <item>@string/app_ops_summaries_delete_sms</item>
+        <item>@string/app_ops_summaries_delete_mms</item>
+        <item>@string/app_ops_summaries_delete_contacts</item>
+        <item>@string/app_ops_summaries_delete_call_log</item>
+        <item>@string/app_ops_summaries_data_change</item>
+        <item>@string/app_ops_summaries_wake_up</item>
+        <item>@string/app_ops_summaries_su</item>
+    </string-array>
+
+    <string-array name="app_ops_labels_cm" translatable="false">
+        <item>@string/app_ops_labels_location</item>
+        <item>@string/app_ops_labels_location</item>
+        <item>@string/app_ops_labels_location</item>
+        <item>@string/app_ops_labels_vibrate</item>
+        <item>@string/app_ops_labels_read_contacts</item>
+        <item>@string/app_ops_labels_modify_contacts</item>
+        <item>@string/app_ops_labels_read_call_log</item>
+        <item>@string/app_ops_labels_modify_call_log</item>
+        <item>@string/app_ops_labels_read_calendar</item>
+        <item>@string/app_ops_labels_modify_calendar</item>
+        <item>@string/app_ops_labels_location</item>
+        <item>@string/app_ops_labels_notification_toast</item>
+        <item>@string/app_ops_labels_location</item>
+        <item>@string/app_ops_labels_call_phone</item>
+        <item>@string/app_ops_labels_read_sms_db</item>
+        <item>@string/app_ops_labels_write_sms_db</item>
+        <item>@string/app_ops_labels_receive_sms</item>
+        <item>@string/app_ops_labels_receive_sms</item>
+        <item>@string/app_ops_labels_receive_mms</item>
+        <item>@string/app_ops_labels_receive_sms</item>
+        <item>@string/app_ops_labels_send_sms</item>
+        <item>@string/app_ops_labels_receive_sms</item>
+        <item>@string/app_ops_labels_send_sms</item>
+        <item>@string/app_ops_labels_modify_settings</item>
+        <item>@string/app_ops_labels_draw_on_top</item>
+        <item>@string/app_ops_labels_access_notifications</item>
+        <item>@string/app_ops_labels_camera</item>
+        <item>@string/app_ops_labels_record_audio</item>
+        <item>@string/app_ops_labels_play_audio</item>
+        <item>@string/app_ops_labels_read_clipboard</item>
+        <item>@string/app_ops_labels_modify_clipboard</item>
+        <item>@string/app_ops_labels_media_buttons</item>
+        <item>@string/app_ops_labels_audio_focus</item>
+        <item>@string/app_ops_labels_master_volume</item>
+        <item>@string/app_ops_labels_voice_volume</item>
+        <item>@string/app_ops_labels_ring_volume</item>
+        <item>@string/app_ops_labels_media_volume</item>
+        <item>@string/app_ops_labels_alarm_volume</item>
+        <item>@string/app_ops_labels_notification_volume</item>
+        <item>@string/app_ops_labels_bluetooth_volume</item>
+        <item>@string/app_ops_labels_keep_awake</item>
+        <item>@string/app_ops_labels_location</item>
+        <item>@string/app_ops_labels_location</item>
+        <item>@string/app_ops_labels_get_usage_stats</item>
+        <item>@string/app_ops_labels_mute_unmute_microphone</item>
+        <item>@string/app_ops_labels_toast_window</item>
+        <item>@string/app_ops_labels_project_media</item>
+        <item>@string/app_ops_labels_activate_vpn</item>
+        <item>@string/app_ops_labels_wifi_change</item>
+        <item>@string/app_ops_labels_bluetooth_change</item>
+        <item>@string/app_ops_labels_send_mms</item>
+        <item>@string/app_ops_labels_read_mms</item>
+        <item>@string/app_ops_labels_write_mms</item>
+        <item>@string/app_ops_labels_auto_start</item>
+        <item>@string/app_ops_labels_nfc_change</item>
+        <item>@string/app_ops_labels_delete_sms</item>
+        <item>@string/app_ops_labels_delete_mms</item>
+        <item>@string/app_ops_labels_delete_contacts</item>
+        <item>@string/app_ops_labels_delete_call_log</item>
+        <item>@string/app_ops_labels_data_change</item>
+        <item>@string/app_ops_labels_wake_up</item>
+        <item>@string/app_ops_labels_su</item>
+    </string-array>
+
+    <!-- Names of categories of app ops tabs -->
+    <string-array name="app_ops_categories_cm" translatable="false">
+        <item>@string/app_ops_categories_location</item>
+        <item>@string/app_ops_categories_personal</item>
+        <item>@string/app_ops_categories_messaging</item>
+        <item>@string/app_ops_categories_media</item>
+        <item>@string/app_ops_categories_device</item>
+        <item>@string/app_ops_categories_bootup</item>
+       <item>@string/app_ops_categories_su</item>
+    </string-array>
+
+    <!--- Navigation bar -->
+    <!--- Navigation bar height -->
+    <string-array name="navigation_bar_height_entries" translatable="false">
+        <item>@string/navigation_bar_height_48</item>
+        <item>@string/navigation_bar_height_44</item>
+        <item>@string/navigation_bar_height_40</item>
+        <item>@string/navigation_bar_height_36</item>
+        <item>@string/navigation_bar_height_32</item>
+        <item>@string/navigation_bar_height_28</item>
+        <item>@string/navigation_bar_height_24</item>
+        <item>@string/navigation_bar_height_20</item>
+        <item>@string/navigation_bar_height_0</item>
+    </string-array>
+
+    <string-array name="navigation_bar_height_values" translatable="false">
+        <item>48</item>
+        <item>44</item>
+        <item>40</item>
+        <item>36</item>
+        <item>32</item>
+        <item>28</item>
+        <item>24</item>
+        <item>20</item>
+        <item>0</item>
+    </string-array>
+
+    <!-- statusbar clock and date customization -->
+    <string-array name="clock_style_entries" translatable="false">
+        <item>@string/right_clock</item>
+        <item>@string/center_clock</item>
+        <item>@string/left_clock</item>
+    </string-array>
+
+    <string-array name="clock_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="entries_status_bar_am_pm">
+        <item>@string/am_pm_clock_none</item>
+        <item>@string/am_pm_clock_small</item>
+        <item>@string/am_pm_clock_normal</item>
+    </string-array>
+
+    <string-array name="values_status_bar_am_pm" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="clock_date_display_entries">
+        <item>@string/clock_date_display_none</item>
+        <item>@string/clock_date_display_small</item>
+        <item>@string/clock_date_display_normal</item>
+    </string-array>
+
+    <string-array name="clock_date_display_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="clock_date_style_entries">
+        <item>@string/clock_date_style_normal</item>
+        <item>@string/clock_date_style_lowercase</item>
+        <item>@string/clock_date_style_uppercase</item>
+    </string-array>
+
+    <string-array name="clock_date_style_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="clock_date_format_entries_values">
+        <item>dd/MM/yy</item>
+        <item>MM/dd/yy</item>
+        <item>yyyy-MM-dd</item>
+        <item>yyyy-dd-MM</item>
+        <item>dd-MM-yyyy</item>
+        <item>MM-dd-yyyy</item>
+        <item>MMM dd</item>
+        <item>MMM dd, yyyy</item>
+        <item>MMMM dd, yyyy</item>
+        <item>EEE</item>
+        <item>EEE dd</item>
+        <item>EEE dd/MM</item>
+        <item>EEE MM/dd</item>
+        <item>EEE dd MMM</item>
+        <item>EEE MMM dd</item>
+        <item>EEE MMMM dd</item>
+        <item>EEEE dd/MM</item>
+        <item>EEEE MM/dd</item>
+        <item>@string/clock_date_format_custom</item>
+    </string-array>
+
+    <!-- Advanced reboot menu dev options -->
+    <string-array name="advanced_reboot_entries">
+        <item>@string/advanced_reboot_disabled</item>
+        <item>@string/advanced_reboot_hide_on_keyguard</item>
+        <item>@string/advanced_reboot_show_always</item>
+    </string-array>
+
+    <string-array name="advanced_reboot_values" translatable="false">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+</resources>
