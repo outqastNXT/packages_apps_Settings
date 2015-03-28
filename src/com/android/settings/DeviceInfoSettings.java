@@ -440,6 +440,7 @@ public class DeviceInfoSettings extends SettingsPreferenceFragment implements In
                 }
                 if (!checkIntentAction(context, "android.settings.WEBVIEW_LICENSE")) {
                     keys.add(KEY_WEBVIEW_LICENSE);
+                }
                 return keys;
             }
 
