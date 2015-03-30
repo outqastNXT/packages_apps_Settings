@@ -6043,4 +6043,8 @@
 
     <!-- SuperSU header name - the app hides itself from launcher based on this resource name being present in com.android.settings -->
     <string name="supersu_title">SuperSU</string>
+
+    <!-- Saosp Settings menus -->
+    <string name="simpleaosp_settings_title">outqastNXT Tweaks</string>
+    <string name="keywords_simpleaosp">simpleaosp</string>
 </resources>
