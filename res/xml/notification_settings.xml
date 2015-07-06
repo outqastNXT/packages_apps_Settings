@@ -39,14 +39,27 @@
         <!-- Ring volume -->
         <com.android.settings.notification.VolumeSeekBarPreference
                 android:key="ring_volume"
-                android:icon="@*android:drawable/ic_audio_ring_notif"
+                android:icon="@drawable/ring_ring"
                 android:title="@string/ring_volume_option_title" />
+
+        <!-- Volume steps -->
+        <PreferenceScreen
+                android:key="volume_steps"
+                android:fragment="com.android.settings.euphoria.VolumeSteps"
+                android:title="@string/volume_steps_title" />
 
         <!-- Notification volume -->
         <com.android.settings.notification.VolumeSeekBarPreference
                 android:key="notification_volume"
                 android:icon="@*android:drawable/ic_audio_ring_notif"
                 android:title="@string/notification_volume_option_title" />
+
+        <!-- Link Volume Notification -->
+        <SwitchPreference
+                android:key="volume_link_notification"
+                android:title="@string/link_volume_option_title"
+                android:persistent = "false"
+                android:defaultValue = "true" />
 
         <!-- Also vibrate for calls -->
         <SwitchPreference
@@ -91,12 +104,16 @@
         android:title="@string/notification_section_header" >
 
         <!-- Pulse notification light -->
-        <SwitchPreference
-                android:key="notification_pulse"
-                android:title="@string/notification_pulse_title"
-                android:switchTextOff=""
-                android:switchTextOn=""
-                android:persistent="false" />
+        <PreferenceScreen
+                android:key="notification_light"
+                android:title="@string/notification_light_title"
+                android:fragment="com.android.settings.notificationlight.NotificationLightSettings" />
+
+        <!-- Battery light -->
+        <PreferenceScreen
+                android:key="battery_light"
+                android:title="@string/battery_light_title"
+                android:fragment="com.android.settings.notificationlight.BatteryLightSettings" />
 
          <!-- When device is locked -->
         <com.android.settings.notification.DropDownPreference
@@ -116,6 +133,26 @@
                 android:title="@string/manage_notification_access_title"
                 android:persistent="false"
                 android:fragment="com.android.settings.notification.NotificationAccessSettings" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="heads_up_notification"
+        android:title="@string/heads_up_title" >
+
+        <ListPreference
+                android:key="heads_up_snooze_time"
+                android:title="@string/heads_up_snooze_title"
+                android:entries="@array/heads_up_snooze_entries"
+                android:entryValues="@array/heads_up_snooze_values"
+                android:persistent="false" />
+
+        <ListPreference
+                android:key="heads_up_time_out"
+                android:title="@string/heads_up_time_out_title"
+                android:entries="@array/heads_up_time_out_entries"
+                android:entryValues="@array/heads_up_time_out_values"
+                android:persistent="false" />
 
     </PreferenceCategory>
 

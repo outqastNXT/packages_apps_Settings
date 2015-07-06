@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2008 The Android Open Source Project
+ * Copyright (C) 2013-2014 The CyanogenMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,6 +50,7 @@ import android.os.UserManager;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
@@ -77,7 +79,8 @@ import java.util.List;
  */
 public class DevelopmentSettings extends SettingsPreferenceFragment
         implements DialogInterface.OnClickListener, DialogInterface.OnDismissListener,
-                OnPreferenceChangeListener, SwitchBar.OnSwitchChangeListener, Indexable {
+                OnPreferenceChangeListener, SwitchBar.OnSwitchChangeListener, Indexable,
+                OnPreferenceClickListener {
     private static final String TAG = "DevelopmentSettings";
 
     /**
@@ -151,6 +154,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
 
     private static final String SHOW_ALL_ANRS_KEY = "show_all_anrs";
 
+    private static final String KILL_APP_LONGPRESS_BACK = "kill_app_longpress_back";
+
     private static final String PROCESS_STATS = "proc_stats";
 
     private static final String TAG_CONFIRM_ENFORCE = "confirm_enforce";
@@ -215,9 +220,9 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private ListPreference mLogdSize;
     private ListPreference mTrackFrameTime;
     private ListPreference mShowNonRectClip;
-    private ListPreference mWindowAnimationScale;
-    private ListPreference mTransitionAnimationScale;
-    private ListPreference mAnimatorDurationScale;
+    private AnimationScalePreference mWindowAnimationScale;
+    private AnimationScalePreference mTransitionAnimationScale;
+    private AnimationScalePreference mAnimatorDurationScale;
     private ListPreference mOverlayDisplayDevices;
     private ListPreference mOpenGLTraces;
 
@@ -230,6 +235,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
     private ListPreference mAppProcessLimit;
 
     private SwitchPreference mShowAllANRs;
+    private SwitchPreference mKillAppLongpressBack;
 
     private PreferenceScreen mProcessStats;
     private final ArrayList<Preference> mAllPrefs = new ArrayList<Preference>();
@@ -338,14 +344,15 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         mWifiAllowScansWithTraffic = findAndInitSwitchPref(WIFI_ALLOW_SCAN_WITH_TRAFFIC_KEY);
         mLogdSize = addListPreference(SELECT_LOGD_SIZE_KEY);
 
-        mWindowAnimationScale = addListPreference(WINDOW_ANIMATION_SCALE_KEY);
-        mTransitionAnimationScale = addListPreference(TRANSITION_ANIMATION_SCALE_KEY);
-        mAnimatorDurationScale = addListPreference(ANIMATOR_DURATION_SCALE_KEY);
         mOverlayDisplayDevices = addListPreference(OVERLAY_DISPLAY_DEVICES_KEY);
         mOpenGLTraces = addListPreference(OPENGL_TRACES_KEY);
         mSimulateColorSpace = addListPreference(SIMULATE_COLOR_SPACE);
         mUseAwesomePlayer = findAndInitSwitchPref(USE_AWESOMEPLAYER_KEY);
         mUSBAudio = findAndInitSwitchPref(USB_AUDIO_KEY);
+
+        mWindowAnimationScale = findAndInitAnimationScalePreference(WINDOW_ANIMATION_SCALE_KEY);
+        mTransitionAnimationScale = findAndInitAnimationScalePreference(TRANSITION_ANIMATION_SCALE_KEY);
+        mAnimatorDurationScale = findAndInitAnimationScalePreference(ANIMATOR_DURATION_SCALE_KEY);
 
         mImmediatelyDestroyActivities = (SwitchPreference) findPreference(
                 IMMEDIATELY_DESTROY_ACTIVITIES_KEY);
@@ -358,6 +365,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 SHOW_ALL_ANRS_KEY);
         mAllPrefs.add(mShowAllANRs);
         mResetSwitchPrefs.add(mShowAllANRs);
+
+        mKillAppLongpressBack = findAndInitSwitchPref(KILL_APP_LONGPRESS_BACK);
 
         Preference hdcpChecking = findPreference(HDCP_CHECKING_KEY);
         if (hdcpChecking != null) {
@@ -381,6 +390,14 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             pref.setEnabled(false);
             mDisabledPrefs.add(pref);
         }
+    }
+
+    private AnimationScalePreference findAndInitAnimationScalePreference(String key) {
+        AnimationScalePreference pref = (AnimationScalePreference) findPreference(key);
+        pref.setOnPreferenceChangeListener(this);
+        pref.setOnPreferenceClickListener(this);
+        mAllPrefs.add(pref);
+        return pref;
     }
 
     private SwitchPreference findAndInitSwitchPref(String key) {
@@ -471,6 +488,7 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             setPrefsEnabledState(mLastEnabledState);
         }
         mSwitchBar.show();
+        updateKillAppLongpressBackOptions();
     }
 
     @Override
@@ -591,6 +609,17 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             hdcpChecking.setSummary(summaries[index]);
             hdcpChecking.setOnPreferenceChangeListener(this);
         }
+    }
+
+    private void writeKillAppLongpressBackOptions() {
+        Settings.Secure.putInt(getActivity().getContentResolver(),
+                Settings.Secure.KILL_APP_LONGPRESS_BACK,
+                mKillAppLongpressBack.isChecked() ? 1 : 0);
+    }
+
+    private void updateKillAppLongpressBackOptions() {
+        mKillAppLongpressBack.setChecked(Settings.Secure.getInt(
+            getActivity().getContentResolver(), Settings.Secure.KILL_APP_LONGPRESS_BACK, 0) != 0);
     }
 
     private void updatePasswordSummary() {
@@ -1153,23 +1182,13 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                 getActivity().getContentResolver(), Settings.Global.ALWAYS_FINISH_ACTIVITIES, 0) != 0);
     }
 
-    private void updateAnimationScaleValue(int which, ListPreference pref) {
+    private void updateAnimationScaleValue(int which, AnimationScalePreference pref) {
         try {
             float scale = mWindowManager.getAnimationScale(which);
             if (scale != 1) {
                 mHaveDebugSettings = true;
             }
-            CharSequence[] values = pref.getEntryValues();
-            for (int i=0; i<values.length; i++) {
-                float val = Float.parseFloat(values[i].toString());
-                if (scale <= val) {
-                    pref.setValueIndex(i);
-                    pref.setSummary(pref.getEntries()[i]);
-                    return;
-                }
-            }
-            pref.setValueIndex(values.length-1);
-            pref.setSummary(pref.getEntries()[0]);
+            pref.setScale(scale);
         } catch (RemoteException e) {
         }
     }
@@ -1180,7 +1199,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         updateAnimationScaleValue(2, mAnimatorDurationScale);
     }
 
-    private void writeAnimationScaleOption(int which, ListPreference pref, Object newValue) {
+    private void writeAnimationScaleOption(int which, AnimationScalePreference pref,
+            Object newValue) {
         try {
             float scale = newValue != null ? Float.parseFloat(newValue.toString()) : 1;
             mWindowManager.setAnimationScale(which, scale);
@@ -1320,6 +1340,11 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                         Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 0);
                 mLastEnabledState = isChecked;
                 setPrefsEnabledState(mLastEnabledState);
+
+                // Hide development settings from the Settings menu (Android 4.2 behaviour)
+                getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit()
+                    .putBoolean(PREF_SHOW, false)
+                    .apply();
             }
         }
     }
@@ -1343,6 +1368,16 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    @Override
+    public boolean onPreferenceClick(Preference preference) {
+        if (preference == mWindowAnimationScale ||
+                preference == mTransitionAnimationScale ||
+                preference == mAnimatorDurationScale) {
+            ((AnimationScalePreference) preference).click();
+        }
+        return false;
     }
 
     @Override
@@ -1454,6 +1489,8 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
             writeUseAwesomePlayerOptions();
         } else if (preference == mUSBAudio) {
             writeUSBAudioOptions();
+        } else if (preference == mKillAppLongpressBack) {
+            writeKillAppLongpressBackOptions();
         } else {
             return super.onPreferenceTreeClick(preferenceScreen, preference);
         }
@@ -1557,6 +1594,13 @@ public class DevelopmentSettings extends SettingsPreferenceFragment
                         Settings.Global.DEVELOPMENT_SETTINGS_ENABLED, 1);
                 mLastEnabledState = true;
                 setPrefsEnabledState(mLastEnabledState);
+
+                // Make sure the development settings is visible in the main Settings menu
+                // This is needed since we may have just turned off dev settings and want to
+                // turn it on again
+                getActivity().getSharedPreferences(PREF_FILE, Context.MODE_PRIVATE).edit()
+                    .putBoolean(PREF_SHOW, true)
+                    .apply();
             } else {
                 // Reset the toggle
                 mSwitchBar.setChecked(false);

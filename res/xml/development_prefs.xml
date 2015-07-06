@@ -110,17 +110,17 @@
 
         <SwitchPreference
             android:key="wifi_verbose_logging"
-            android:title="@string/wifi_verbose_logging" />
+            android:title="@string/wifi_verbose_logging" 
             android:summary="@string/wifi_verbose_logging_summary"/>
 
         <SwitchPreference
             android:key="wifi_aggressive_handover"
-            android:title="@string/wifi_aggressive_handover" />
+            android:title="@string/wifi_aggressive_handover" 
             android:summary="@string/wifi_aggressive_handover_summary"/>
 
        <SwitchPreference
             android:key="wifi_allow_scan_with_traffic"
-            android:title="@string/wifi_allow_scan_with_traffic" />
+            android:title="@string/wifi_allow_scan_with_traffic" 
             android:summary="@string/wifi_allow_scan_with_traffic_summary"/>
 
         <ListPreference
@@ -165,21 +165,21 @@
             android:title="@string/force_rtl_layout_all_locales"
             android:summary="@string/force_rtl_layout_all_locales_summary"/>
 
-        <ListPreference
+        <com.android.settings.AnimationScalePreference
             android:key="window_animation_scale"
             android:title="@string/window_animation_scale_title"
             android:persistent="false"
             android:entries="@array/window_animation_scale_entries"
             android:entryValues="@array/window_animation_scale_values" />
 
-        <ListPreference
+        <com.android.settings.AnimationScalePreference
             android:key="transition_animation_scale"
             android:title="@string/transition_animation_scale_title"
             android:persistent="false"
             android:entries="@array/transition_animation_scale_entries"
             android:entryValues="@array/transition_animation_scale_values" />
 
-        <ListPreference
+        <com.android.settings.AnimationScalePreference
             android:key="animator_duration_scale"
             android:title="@string/animator_duration_scale_title"
             android:persistent="false"
@@ -310,6 +310,11 @@
             android:key="show_all_anrs"
             android:title="@string/show_all_anrs"
             android:summary="@string/show_all_anrs_summary"/>
+
+        <SwitchPreference
+            android:key="kill_app_longpress_back"
+            android:title="@string/kill_app_longpress_back"
+            android:summary="@string/kill_app_longpress_back_summary"/>
 
      </PreferenceCategory>
 
